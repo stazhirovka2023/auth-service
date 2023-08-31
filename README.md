@@ -6,14 +6,15 @@
 Также настраивается  `ProviderSettings`  и  `UserDetailsService` .
 
 Сам `RegisteredClientRepository` настраивается так: 
-4.  `.clientId("gateway")` : Устанавливает идентификатор клиента как "gateway".
-5.  `.clientSecret("{noop}secret")` : Устанавливает секрет клиента как "{noop}secret". "{noop}" означает, что секрет не требует шифрования. В таком виде он и будет лежать в БД.
-6.  `.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)` : Устанавливает метод аутентификации клиента как `ClientAuthenticationMethod.CLIENT_SECRET_BASIC`, что означает, что клиент будет использовать базовую аутентификацию с использованием идентификатора (`client_id`) и секрета клиента (`secret`).
-7.  `.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)` : Устанавливает тип авторизации клиента как `AuthorizationGrantType.AUTHORIZATION_CODE`, что означает, что клиент будет использовать авторизационный код (`authorization_code`) для получения доступа к ресурсам.
-8.  `.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)` : Устанавливает тип авторизации клиента как `AuthorizationGrantType.REFRESH_TOKEN`, что означает, что клиент может использовать обновляемый токен для продления доступа без повторной аутентификации.
-9.  `.redirectUri("http://127.0.0.1:8080/login/oauth2/code/gateway")` : Этот код устанавливает URL, на который будет перенаправлен пользователь после аутентификации. После перенаправления на этот URL, сервер обрабатывает полученный авторизационный код и обменивает его на токен доступа. 
+
+1.  `.clientId("gateway")` : Устанавливает идентификатор клиента как "gateway".
+2.  `.clientSecret("{noop}secret")` : Устанавливает секрет клиента как "{noop}secret". "{noop}" означает, что секрет не требует шифрования. В таком виде он и будет лежать в БД.
+3.  `.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)` : Устанавливает метод аутентификации клиента как `ClientAuthenticationMethod.CLIENT_SECRET_BASIC`, что означает, что клиент будет использовать базовую аутентификацию с использованием идентификатора (`client_id`) и секрета клиента (`secret`).
+4.  `.authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)` : Устанавливает тип авторизации клиента как `AuthorizationGrantType.AUTHORIZATION_CODE`, что означает, что клиент будет использовать авторизационный код (`authorization_code`) для получения доступа к ресурсам.
+5.  `.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)` : Устанавливает тип авторизации клиента как `AuthorizationGrantType.REFRESH_TOKEN`, что означает, что клиент может использовать обновляемый токен для продления доступа без повторной аутентификации.
+6.  `.redirectUri("http://127.0.0.1:8080/login/oauth2/code/gateway")` : Этот код устанавливает URL, на который будет перенаправлен пользователь после аутентификации. После перенаправления на этот URL, сервер обрабатывает полученный авторизационный код и обменивает его на токен доступа. 
 Мы здесь указываем наш сервер авторизации в качестве домена, так как он и обменяет код на токен для клиента.
-10.  `.scope(OidcScopes.OPENID)` : Устанавливает область видимости клиента на "openid". Это протокол OpenID Connect (OIDC), который является протоколом идентификации на основе OAuth 2.0. 
+7.  `.scope(OidcScopes.OPENID)` : Устанавливает область видимости клиента на "openid". Это протокол OpenID Connect (OIDC), который является протоколом идентификации на основе OAuth 2.0. 
 
 ```
 .scope(OidcScopes.OPENID)` : Это метод, который устанавливает область видимости для клиента. 
@@ -21,9 +22,9 @@
 В данном случае используется  OidcScopes.OPENID , что означает, что клиент будет запрашивать данные, 
 связанные с идентификацией пользователя.
 ```
-11.  `.scope("message.read")` : Устанавливает дополнительную область видимости клиента на "message.read". В названии для scope ограничений нет, однако общепринято называть их по принципу `ресурс.право_доступа` или `ресурс:право_доступа`
-12.  `new JdbcRegisteredClientRepository(jdbcTemplate)` : Создает новый экземпляр JdbcRegisteredClientRepository, который реализует интерфейс RegisteredClientRepository и использует jdbcTemplate для взаимодействия с базой данных.
-13.  `registeredClientRepository.save(registeredClient)` : Сохраняет созданный registeredClient в репозитории.
+8.  `.scope("message.read")` : Устанавливает дополнительную область видимости клиента на "message.read". В названии для scope ограничений нет, однако общепринято называть их по принципу `ресурс.право_доступа` или `ресурс:право_доступа`
+9.  `new JdbcRegisteredClientRepository(jdbcTemplate)` : Создает новый экземпляр JdbcRegisteredClientRepository, который реализует интерфейс RegisteredClientRepository и использует jdbcTemplate для взаимодействия с базой данных.
+10.  `registeredClientRepository.save(registeredClient)` : Сохраняет созданный registeredClient в репозитории.
 
 ## Настройка безопасности
 В том же файле  `OAuth2AuthServerSecurityConfiguration.java`  настраиваются два  `SecurityFilterChain` .
