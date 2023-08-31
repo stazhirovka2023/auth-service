@@ -5,7 +5,7 @@
 Здесь описан  `RegisteredClientRepository`  для хранения зарегистрированных клиентов, генерируется RSA ключ для подписи токенов.
 Также настраивается  `ProviderSettings`  и  `UserDetailsService` .
 
-Сам `` настраивается так: 
+Сам `RegisteredClientRepository` настраивается так: 
 4.  `.clientId("gateway")` : Устанавливает идентификатор клиента как "gateway".
 5.  `.clientSecret("{noop}secret")` : Устанавливает секрет клиента как "{noop}secret". "{noop}" означает, что секрет не требует шифрования. В таком виде он и будет лежать в БД.
 6.  `.clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)` : Устанавливает метод аутентификации клиента как `ClientAuthenticationMethod.CLIENT_SECRET_BASIC`, что означает, что клиент будет использовать базовую аутентификацию с использованием идентификатора (`client_id`) и секрета клиента (`secret`).
