@@ -11,7 +11,6 @@ import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.test.context.junit4.SpringRunner;
 import ru.liga.authentication.authservice.dto.RegDto;
 
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doNothing;
@@ -25,7 +24,7 @@ class UserServiceTest {
     private UserService userServiceTest;
 
     @MockBean
-    private JdbcUserDetailsManager  userDetailsServiceTest;
+    private JdbcUserDetailsManager userDetailsServiceTest;
 
     @Test
     void deleteUser_success() {
@@ -47,7 +46,7 @@ class UserServiceTest {
     }
 
     @Test
-    public void createUser_alreadyExists() {
+    void createUser_alreadyExists() {
         when(userServiceTest.createUser(any(RegDto.class)))
                 .thenReturn(new ResponseEntity<>("Пользователь с таким именем уже существует", HttpStatus.BAD_REQUEST));
 
