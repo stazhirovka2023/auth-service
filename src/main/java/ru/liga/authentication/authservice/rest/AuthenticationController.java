@@ -20,8 +20,4 @@ public class AuthenticationController {
         return userService.createUser(request);
     }
 
-    @PostMapping("/login")
-    public void login() {
-
-    }
 }
