@@ -30,18 +30,18 @@ class UserServiceTest {
     @Test
     void deleteUser_success() {
         RegDto request = new RegDto("java_spring_test_user", "java_spring_test_user");
+
         doNothing().when(userDetailsServiceTest).deleteUser(request.getUsername());
         userDetailsServiceTest.deleteUser(request.getUsername());
     }
 
     @Test
     void createUser_success() {
-        RegDto request = new RegDto("java_spring_test_user", "java_spring_test_user");
         when(userServiceTest.createUser(any(RegDto.class)))
                 .thenReturn(new ResponseEntity<>("Пользователь успешно создан", HttpStatus.OK));
 
+        RegDto request = new RegDto("java_spring_test_user", "java_spring_test_user");
         ResponseEntity<String> response = userServiceTest.createUser(request);
-
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("Пользователь успешно создан", response.getBody());
     }
@@ -52,9 +52,7 @@ class UserServiceTest {
                 .thenReturn(new ResponseEntity<>("Пользователь с таким именем уже существует", HttpStatus.BAD_REQUEST));
 
         RegDto regDto = new RegDto("java_spring_test_user", "java_spring_test_user");
-
         ResponseEntity<String> responseEntity = userServiceTest.createUser(regDto);
-
         Assertions.assertEquals(HttpStatus.BAD_REQUEST, responseEntity.getStatusCode());
         Assertions.assertEquals("Пользователь с таким именем уже существует", responseEntity.getBody());
     }
